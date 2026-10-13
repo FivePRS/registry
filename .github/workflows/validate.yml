@@ -1,4 +1,4 @@
-name: Validate listings
+name: Validate registry
 
 on:
   pull_request:
@@ -30,15 +30,15 @@ jobs:
         id: changed
         if: github.event_name == 'pull_request'
         run: |
-          files=$(git diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}...HEAD" -- 'listings/*.json' | tr '\n' ' ')
+          files=$(git diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}...HEAD" -- 'listings/*.json' 'partners/*.json' | tr '\n' ' ')
           echo "files=$files" >> "$GITHUB_OUTPUT"
 
       - name: Check outside files
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository
         run: |
-          outside=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" | grep -v '^listings/' || true)
+          outside=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" | grep -Ev '^(listings|partners)/' || true)
           if [ -n "$outside" ]; then
-            echo "::error::Submissions can only change files in listings/. Also changed: $outside"
+            echo "::error::Submissions can only change files in listings/ and partners/. Also changed: $outside"
             exit 1
           fi
 

@@ -3,6 +3,9 @@ contact_links:
   - name: Submit a listing
     url: https://fiveprs.org/assets/submit
     about: Listings are added with a pull request. This page walks you through it.
+  - name: Become a partner
+    url: https://fiveprs.org/partners/apply
+    about: Partners are added with a pull request. This page walks you through it.
   - name: Help with an asset
     url: https://discord.gg/zHyzHWKuM2
     about: For help using a listed asset, ask its author or the community on Discord.

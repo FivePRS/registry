@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schema/partner.schema.json",
+  "id": "fastframe-hosting",
+  "name": "FastFrame Hosting",
+  "type": "host",
+  "summary": "FiveM hosting in North America and Europe, with FivePRS ready to install from the panel.",
+  "logo": "https://raw.githubusercontent.com/fastframe/branding/main/logo.png",
+  "website": "https://fastframe.example",
+  "discord": "https://discord.gg/fastframe",
+  "offer": "15% off your first month with code FIVEPRS",
+  "tags": ["na", "eu"]
+}

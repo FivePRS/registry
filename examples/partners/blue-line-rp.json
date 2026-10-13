@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schema/partner.schema.json",
+  "id": "blue-line-rp",
+  "name": "Blue Line RP",
+  "type": "community",
+  "summary": "Serious public safety roleplay with full Police, Fire and EMS departments, running FivePRS since the first test build.",
+  "logo": "https://raw.githubusercontent.com/bluelinerp/branding/main/logo.png",
+  "website": "https://bluelinerp.example",
+  "discord": "https://discord.gg/bluelinerp",
+  "joinCode": "abc123",
+  "tags": ["us", "serious-rp", "whitelisted"]
+}

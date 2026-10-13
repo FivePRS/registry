@@ -1,6 +1,9 @@
 # FivePRS Registry
 
-The list of community assets shown on **[fiveprs.org/assets](https://fiveprs.org/assets)**: callout packs, plugins, terminal apps, scripts, vehicles, maps and clothing made for FivePRS.
+The community assets on **[fiveprs.org/assets](https://fiveprs.org/assets)** and the partners on **[fiveprs.org/partners](https://fiveprs.org/partners)**.
+
+- **[Assets](#submitting)**: callout packs, plugins, terminal apps, scripts, vehicles, maps and clothing made for FivePRS, one JSON file each in [`listings/`](listings).
+- **[Partners](#partners)**: communities running FivePRS, hosts that offer it and studios building for it, one JSON file each in [`partners/`](partners).
 
 Every listing is one JSON file in [`listings/`](listings). You add a listing with a pull request, the FivePRS team reviews it, and once it's merged it appears on the site within about ten minutes. The site reads your repository's latest GitHub release for the version and download, so publishing a new release updates your listing without another pull request.
 
@@ -64,9 +67,54 @@ Listings that stop meeting these rules, or whose repository or download disappea
 - **Changed details:** open a pull request that edits your file.
 - **Remove your listing:** open a pull request that deletes your file.
 
-## Reporting a listing
+## Partners
 
-Use **Report** on the listing's page, or [open a report](https://github.com/FivePRS/registry/issues/new?template=report-listing.yml).
+Anyone can apply. Partners are added the same way as assets: a pull request that adds `partners/<your-id>.json`. The [Become a partner](https://fiveprs.org/partners/apply) page opens one for you with a template for your type. Examples of each type are in [`examples/partners`](examples/partners).
+
+```json
+{
+  "$schema": "../schema/partner.schema.json",
+  "id": "blue-line-rp",
+  "name": "Blue Line RP",
+  "type": "community",
+  "summary": "Serious public safety roleplay with full Police, Fire and EMS departments.",
+  "logo": "https://raw.githubusercontent.com/bluelinerp/branding/main/logo.png",
+  "website": "https://bluelinerp.example",
+  "discord": "https://discord.gg/bluelinerp",
+  "joinCode": "abc123",
+  "tags": ["us", "serious-rp"]
+}
+```
+
+| Field | Required | Description |
+|---|---|---|
+| `id` | Yes | Lowercase letters, numbers and dashes, matching the file name |
+| `name` | Yes | Display name, 2 to 50 characters |
+| `type` | Yes | `community`, `host` or `studio` |
+| `summary` | Yes | One or two sentences for your card, 20 to 200 characters |
+| `logo` | Yes | A square logo on `raw.githubusercontent.com` or `github.com/user-attachments` |
+| `website` | Hosts | Your website (`https://` only). Optional for others |
+| `discord` | No | A Discord invite that never expires. Your card shows your member count |
+| `github` | No | Your GitHub user or organisation name |
+| `tags` | No | Up to 6 lowercase tags, such as a region, language or roleplay style |
+| `joinCode` | Communities | The code from your `cfx.re/join/<code>` link, for the Join button |
+| `offer` | Hosts, optional | A short offer for FivePRS users, such as a discount code |
+| `assets` | Studios | Ids of your listings in `listings/`. List new assets first, or in the same pull request |
+
+`joinCode` is only for communities, `offer` only for hosts and `assets` only for studios.
+
+**Requirements**
+
+- **Communities** run FivePRS on their server and have a `cfx.re/join` code.
+- **Hosts** can install FivePRS for customers or offer it in their panel, and any offer is real and open to everyone.
+- **Studios** have at least one approved listing in `listings/` and keep their assets working with current FivePRS releases.
+- **Everyone** runs, owns or represents what they list, uses a logo they have the rights to, makes no claims of being official or endorsed by FivePRS, and follows the FiveM and Cfx.re terms of service.
+
+The check confirms your logo is an image, your Discord invite works and doesn't expire, your website responds and your studio's assets are listed. Partners whose invite, website or server disappears are removed.
+
+## Reporting a listing or partner
+
+Use **Report this listing** on an asset's page, or [open a report](https://github.com/FivePRS/registry/issues/new?template=report-listing.yml) for a listing or partner.
 
 Listed assets are made and supported by their authors, not the FivePRS team. See [Third-party liability](https://fiveprs.org/legal/liability).
 

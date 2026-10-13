@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schema/partner.schema.json",
+  "id": "somedev-studio",
+  "name": "SomeDev Studio",
+  "type": "studio",
+  "summary": "We make callout packs and terminal apps for FivePRS, including LSPD Callouts Plus.",
+  "logo": "https://raw.githubusercontent.com/somedev/branding/main/logo.png",
+  "github": "somedev",
+  "assets": ["lspd-callouts-plus"]
+}

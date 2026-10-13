@@ -1,13 +1,13 @@
-name: Report a listing
-description: Tell the FivePRS team about a broken, unsafe or rule-breaking listing.
+name: Report a listing or partner
+description: Tell the FivePRS team about a broken, unsafe or rule-breaking listing or partner.
 title: "Report: "
 labels: [report]
 body:
   - type: input
     id: listing
     attributes:
-      label: Listing id
-      description: The last part of the listing's address, fiveprs.org/assets/<id>.
+      label: Listing or partner id
+      description: For an asset, the last part of its address, fiveprs.org/assets/<id>. For a partner, their name.
     validations:
       required: true
   - type: dropdown
@@ -15,8 +15,9 @@ body:
     attributes:
       label: Reason
       options:
-        - The download is broken or missing
+        - The download, invite, website or server is broken
         - It doesn't work with FivePRS
+        - Misleading details or offer
         - Malware or suspicious behaviour
         - Stolen or leaked content
         - It breaks another listing rule
