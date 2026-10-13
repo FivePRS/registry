@@ -42,7 +42,7 @@ Every listing is one JSON file in [`listings/`](listings). You add a listing wit
 | `source` | Yes | `open` if the repository has the source code and a license, `closed` if it only hosts releases |
 | `asset` | No | The download's file name on your releases. `my-pack.zip` also matches versioned names like `my-pack-1.2.0.zip`. Without it, the site links to your releases page |
 | `homepage` | No | Documentation or a project page (`https://` only) |
-| `image` | No | A 16:9 preview image on `raw.githubusercontent.com` or `github.com/user-attachments` |
+| `image` | No | A 16:9 preview image at a stable `https://` URL, up to 2 MB |
 | `tags` | No | Up to 6 lowercase tags |
 | `minVersion` | No | The oldest FivePRS version your asset works with |
 
@@ -92,12 +92,12 @@ Anyone can apply. Partners are added the same way as assets: a pull request that
 | `name` | Yes | Display name, 2 to 50 characters |
 | `type` | Yes | `community`, `host` or `studio` |
 | `summary` | Yes | One or two sentences for your card, 20 to 200 characters |
-| `logo` | Yes | A square logo on `raw.githubusercontent.com` or `github.com/user-attachments` |
+| `logo` | Yes | A square logo at a stable `https://` URL, such as your own website, up to 2 MB |
 | `website` | Hosts | Your website (`https://` only). Optional for others |
 | `discord` | No | A Discord invite that never expires. Your card shows your member count |
 | `github` | No | Your GitHub user or organisation name |
 | `tags` | No | Up to 6 lowercase tags, such as a region, language or roleplay style |
-| `joinCode` | Communities | The code from your `cfx.re/join/<code>` link, for the Join button |
+| `joinCode` | Communities, optional | The code from your `cfx.re/join/<code>` link if you run a FiveM server, for the Join button |
 | `offer` | Hosts, optional | A short offer for FivePRS users, such as a discount code |
 | `assets` | Studios | Ids of your listings in `listings/`. List new assets first, or in the same pull request |
 
@@ -105,7 +105,7 @@ Anyone can apply. Partners are added the same way as assets: a pull request that
 
 **Requirements**
 
-- **Communities** run FivePRS on their server and have a `cfx.re/join` code.
+- **Communities** are FiveM servers running FivePRS, or roleplay and Discord communities that work with FivePRS. Servers add their `cfx.re/join` code.
 - **Hosts** can install FivePRS for customers or offer it in their panel, and any offer is real and open to everyone.
 - **Studios** have at least one approved listing in `listings/` and keep their assets working with current FivePRS releases.
 - **Everyone** runs, owns or represents what they list, uses a logo they have the rights to, makes no claims of being official or endorsed by FivePRS, and follows the FiveM and Cfx.re terms of service.

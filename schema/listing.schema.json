@@ -58,9 +58,10 @@
       "pattern": "^https://"
     },
     "image": {
-      "description": "A 16:9 preview image hosted on GitHub: raw.githubusercontent.com or github.com/user-attachments.",
+      "description": "A 16:9 preview image (PNG, JPEG, WebP or GIF) at a stable https:// URL, up to 2 MB.",
       "type": "string",
-      "pattern": "^https://(raw\\.githubusercontent\\.com/|github\\.com/user-attachments/assets/)"
+      "format": "uri",
+      "pattern": "^https://"
     },
     "tags": {
       "description": "Up to 6 lowercase tags to help people find the asset.",

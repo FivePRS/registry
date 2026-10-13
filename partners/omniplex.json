@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/partner.schema.json",
+  "id": "omniplex",
+  "name": "Omniplex",
+  "type": "community",
+  "summary": "Explore thousands of Discord bots and servers.",
+  "logo": "https://omniplex.gg/logo.png",
+  "website": "https://omniplex.gg",
+  "discord": "https://discord.gg/KBCRuBKrHe",
+  "tags": ["na", "eu", "usa"]
+}

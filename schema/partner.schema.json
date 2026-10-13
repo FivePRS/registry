@@ -22,7 +22,7 @@
       "maxLength": 50
     },
     "type": {
-      "description": "community: a server or roleplay community running FivePRS. host: a server host offering FivePRS. studio: a developer or team making FivePRS assets.",
+      "description": "community: a FiveM server, roleplay group or Discord community working with FivePRS. host: a server host offering FivePRS. studio: a developer or team making FivePRS assets.",
       "enum": ["community", "host", "studio"]
     },
     "summary": {
@@ -32,9 +32,10 @@
       "maxLength": 200
     },
     "logo": {
-      "description": "A square logo hosted on GitHub: raw.githubusercontent.com or github.com/user-attachments.",
+      "description": "A square logo (PNG, JPEG, WebP, GIF or SVG) at a stable https:// URL, up to 2 MB.",
       "type": "string",
-      "pattern": "^https://(raw\\.githubusercontent\\.com/|github\\.com/user-attachments/assets/)"
+      "format": "uri",
+      "pattern": "^https://"
     },
     "website": {
       "description": "Your website.",
@@ -63,7 +64,7 @@
       }
     },
     "joinCode": {
-      "description": "Communities: the code from your cfx.re/join link.",
+      "description": "Communities with a FiveM server: the code from your cfx.re/join link, for a Join button.",
       "type": "string",
       "pattern": "^[a-z0-9]{6}$"
     },
@@ -87,7 +88,7 @@
   "allOf": [
     {
       "if": { "properties": { "type": { "const": "community" } } },
-      "then": { "required": ["joinCode"], "not": { "anyOf": [{ "required": ["offer"] }, { "required": ["assets"] }] } }
+      "then": { "not": { "anyOf": [{ "required": ["offer"] }, { "required": ["assets"] }] } }
     },
     {
       "if": { "properties": { "type": { "const": "host" } } },

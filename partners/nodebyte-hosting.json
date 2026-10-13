@@ -1,5 +1,5 @@
 {
-  "$schema": "../../schema/partner.schema.json",
+  "$schema": "../schema/partner.schema.json",
   "id": "nodebyte-hosting",
   "name": "NodeByte Hosting",
   "type": "host",

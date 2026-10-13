@@ -39,11 +39,16 @@ async function github(endpoint) {
   return response.json();
 }
 
+const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
+
 async function checkImage(file, url, label) {
-  const response = await fetch(url, { method: "HEAD", redirect: "follow" });
-  if (!response.ok || !(response.headers.get("content-type") ?? "").startsWith("image/")) {
-    error(file, `The ${label} URL doesn't return an image.`);
+  const response = await fetch(url, { redirect: "follow" }).catch(() => null);
+  if (!response?.ok || !(response.headers.get("content-type") ?? "").startsWith("image/")) {
+    return error(file, `The ${label} URL doesn't return an image.`);
   }
+
+  const size = (await response.arrayBuffer()).byteLength;
+  if (size > MAX_IMAGE_BYTES) error(file, `The ${label} is ${(size / 1024 / 1024).toFixed(1)} MB. Keep it under 2 MB.`);
 }
 
 function matchesAsset(fileName, asset) {
@@ -109,6 +114,19 @@ async function checkPartner(file, partner) {
   }
 }
 
+const TYPE_FIELDS = { joinCode: "community", offer: "host", assets: "studio" };
+const TYPE_NAMES = { community: "communities", host: "hosts", studio: "studios" };
+
+function explainPartner(entry) {
+  const messages = [];
+  for (const [field, type] of Object.entries(TYPE_FIELDS)) {
+    if (entry[field] !== undefined && entry.type !== type) messages.push(`"${field}" is only for ${TYPE_NAMES[type]}. Remove it, or change "type".`);
+    if (entry[field] === undefined && entry.type === type && field === "assets") messages.push(`${TYPE_NAMES[type][0].toUpperCase()}${TYPE_NAMES[type].slice(1)} need "${field}".`);
+  }
+  if (entry.type === "host" && entry.website === undefined) messages.push(`Hosts need "website".`);
+  return messages;
+}
+
 const collections = [
   {
     dir: "listings",
@@ -121,6 +139,7 @@ const collections = [
     schema: "partner.schema.json",
     unique: (entry) => [`Name:${entry.name.toLowerCase()}`, ...(entry.joinCode ? [`Join code:${entry.joinCode}`] : [])],
     check: checkPartner,
+    explain: explainPartner,
   },
 ];
 
@@ -149,7 +168,12 @@ async function load(collection) {
     }
 
     if (!validate(entry)) {
-      for (const issue of validate.errors) error(file, `${issue.instancePath || "file"} ${issue.message}`);
+      const explained = collection.explain?.(entry) ?? [];
+      const generic = validate.errors.filter(
+        (issue) => !(explained.length > 0 && (["if", "not"].includes(issue.keyword) || (issue.keyword === "required" && issue.instancePath === ""))),
+      );
+      for (const message of explained) error(file, message);
+      for (const issue of generic) error(file, `${issue.instancePath || "file"} ${issue.message}`);
       continue;
     }
 
