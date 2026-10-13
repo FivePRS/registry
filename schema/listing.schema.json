@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/FivePRS/registry/main/schema/listing.schema.json",
+  "$id": "https://raw.githubusercontent.com/FivePRS/registry/master/schema/listing.schema.json",
   "title": "FivePRS asset listing",
   "description": "One community asset listed on fiveprs.org/assets.",
   "type": "object",

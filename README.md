@@ -7,7 +7,7 @@ Every listing is one JSON file in [`listings/`](listings). You add a listing wit
 ## Submitting
 
 1. Publish your asset in a **public GitHub repository**, with at least one release that has your download (a `.zip`, `.7z` or `.rar`) attached.
-2. [Create `listings/<your-id>.json`](https://github.com/FivePRS/registry/new/main/listings) in this repository. GitHub forks the repository for you and opens a pull request. The [submit page](https://fiveprs.org/assets/submit) fills in a template for you.
+2. [Create `listings/<your-id>.json`](https://github.com/FivePRS/registry/new/master/listings) in this repository. GitHub forks the repository for you and opens a pull request. The [submit page](https://fiveprs.org/assets/submit) fills in a template for you.
 3. A check runs on your pull request. Fix anything it reports, and a reviewer will take it from there.
 
 ```json
