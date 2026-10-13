@@ -1,0 +1,56 @@
+name: Validate listings
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Find changed listings
+        id: changed
+        if: github.event_name == 'pull_request'
+        run: |
+          files=$(git diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}...HEAD" -- 'listings/*.json' | tr '\n' ' ')
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+
+      - name: Check outside files
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          outside=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" | grep -v '^listings/' || true)
+          if [ -n "$outside" ]; then
+            echo "::error::Submissions can only change files in listings/. Also changed: $outside"
+            exit 1
+          fi
+
+      - name: Validate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          CHANGED: ${{ steps.changed.outputs.files }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = "pull_request" ] && [ -z "$CHANGED" ]; then
+            node scripts/validate.mjs
+          else
+            node scripts/validate.mjs --online $CHANGED
+          fi

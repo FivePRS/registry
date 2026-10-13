@@ -1,0 +1,15 @@
+{
+  "$schema": "../schema/listing.schema.json",
+  "id": "lspd-callouts-plus",
+  "name": "LSPD Callouts Plus",
+  "category": "callouts",
+  "summary": "Twelve new police callouts, including bank robberies, hostage situations and street races.",
+  "author": "SomeDev",
+  "repository": "somedev/lspd-callouts-plus",
+  "source": "open",
+  "asset": "lspd-callouts-plus.zip",
+  "homepage": "https://github.com/somedev/lspd-callouts-plus#readme",
+  "image": "https://raw.githubusercontent.com/somedev/lspd-callouts-plus/main/preview.png",
+  "tags": ["police", "pursuits"],
+  "minVersion": "0.9.0-ptb.3"
+}

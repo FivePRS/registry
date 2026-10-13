@@ -1,0 +1,32 @@
+name: Report a listing
+description: Tell the FivePRS team about a broken, unsafe or rule-breaking listing.
+title: "Report: "
+labels: [report]
+body:
+  - type: input
+    id: listing
+    attributes:
+      label: Listing id
+      description: The last part of the listing's address, fiveprs.org/assets/<id>.
+    validations:
+      required: true
+  - type: dropdown
+    id: reason
+    attributes:
+      label: Reason
+      options:
+        - The download is broken or missing
+        - It doesn't work with FivePRS
+        - Malware or suspicious behaviour
+        - Stolen or leaked content
+        - It breaks another listing rule
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What happened? Include versions, console errors or links that help us check.
+    validations:
+      required: true
