@@ -60,7 +60,7 @@ Listings whose `repository` belongs to the [FivePRS](https://github.com/FivePRS)
 - **You made it, or the author agreed to the listing.** If the repository isn't yours, say who gave permission in the pull request.
 - **It's free.** The download on your releases must be the full asset, not a demo or a link to a paid store.
 - **It works with FivePRS.** Keep it working with current releases, or set `minVersion` and note the versions it supports in your README.
-- **Only content you have the rights to share.** No game files, leaked or paid assets, or models and clothing taken from other creators.
+- **Only content you have the rights to share.** No game files, leaked or paid assets, or models and clothing taken from other creators. See [Copyright & DMCA](https://fiveprs.org/legal/copyright) for what counts and how infringement is reported.
 - **No malware.** No obfuscated code that phones home, backdoors, or anything that harms servers or players. Closed-source listings get extra scrutiny.
 - **Open source means licensed.** `"source": "open"` needs a license file in the repository.
 
