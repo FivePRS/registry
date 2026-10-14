@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/listing.schema.json",
+  "id": "fiveprs-loadscreen",
+  "name": "FivePRS Loading Screen",
+  "category": "scripts",
+  "summary": "A FivePRS loading screen with load progress, rotating tips, background music and a welcome back card.",
+  "author": "FivePRS",
+  "repository": "FivePRS/addons",
+  "source": "open",
+  "asset": "fiveprs_addons.zip",
+  "readme": "[fiveprs_addons]/fiveprs_loadscreen/README.md",
+  "tags": [
+    "loading-screen",
+    "music",
+    "branding"
+  ]
+}

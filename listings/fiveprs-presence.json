@@ -1,0 +1,16 @@
+{
+  "$schema": "../schema/listing.schema.json",
+  "id": "fiveprs-presence",
+  "name": "FivePRS Discord Presence",
+  "category": "scripts",
+  "summary": "Shows each player's FivePRS activity in their Discord status, such as their callsign, unit status and current call.",
+  "author": "FivePRS",
+  "repository": "FivePRS/addons",
+  "source": "open",
+  "asset": "fiveprs_addons.zip",
+  "readme": "[fiveprs_addons]/fiveprs_presence/README.md",
+  "tags": [
+    "discord",
+    "rich-presence"
+  ]
+}

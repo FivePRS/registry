@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/listing.schema.json",
+  "id": "fiveprs-notes",
+  "name": "FivePRS Notes",
+  "category": "apps",
+  "summary": "A personal notepad app for the FivePRS terminal, and the reference example for building terminal apps.",
+  "author": "FivePRS",
+  "repository": "FivePRS/addons",
+  "source": "open",
+  "asset": "fiveprs_addons.zip",
+  "readme": "[fiveprs_addons]/fiveprs_notes/README.md",
+  "tags": [
+    "terminal",
+    "notes",
+    "example"
+  ]
+}

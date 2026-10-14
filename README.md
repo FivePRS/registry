@@ -41,6 +41,7 @@ Every listing is one JSON file in [`listings/`](listings). You add a listing wit
 | `repository` | Yes | The GitHub repository you release from, as `owner/name` |
 | `source` | Yes | `open` if the repository has the source code and a license, `closed` if it only hosts releases |
 | `asset` | No | The download's file name on your releases. `my-pack.zip` also matches versioned names like `my-pack-1.2.0.zip`. Without it, the site links to your releases page |
+| `readme` | No | Path to a Markdown file in your repository to show on the listing page, such as `packs/highway/README.md`. Use it when one repository holds several assets. Without it, the page shows the repository's README |
 | `homepage` | No | Documentation or a project page (`https://` only) |
 | `image` | No | A 16:9 preview image at a stable `https://` URL, up to 2 MB |
 | `tags` | No | Up to 6 lowercase tags |
@@ -49,6 +50,10 @@ Every listing is one JSON file in [`listings/`](listings). You add a listing wit
 The full format is in [`schema/listing.schema.json`](schema/listing.schema.json). Editors such as VS Code use it to check your file as you type.
 
 The listing page shows your repository's README, so make it a good one: what the asset does, how to install it and any configuration.
+
+## Official listings
+
+Listings whose `repository` belongs to the [FivePRS](https://github.com/FivePRS) organisation get an **Official** badge and are shown first. The badge comes from the repository owner, so it can't be added to a listing, and only official listings can use FivePRS as their `author`.
 
 ## Rules
 

@@ -5,6 +5,7 @@ import addFormats from "ajv-formats";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const RESERVED = new Set(["submit", "apply", "new", "edit", "search"]);
+const OFFICIAL_OWNER = "fiveprs";
 const token = process.env.GITHUB_TOKEN;
 const submitter = process.env.PR_AUTHOR;
 const online = process.argv.includes("--online");
@@ -66,6 +67,14 @@ function matchesAsset(fileName, asset) {
   );
 }
 
+const isOfficial = (listing) => listing.repository.split("/")[0].toLowerCase() === OFFICIAL_OWNER;
+
+function checkOfficial(file, listing) {
+  if (isOfficial(listing)) return;
+  if (/fiveprs/i.test(listing.author)) error(file, `Only listings from the FivePRS organisation can use FivePRS in "author".`);
+  if (/^fiveprs\b/i.test(listing.name)) warn(file, `"${listing.name}" starts with FivePRS. Reviewers: make sure it doesn't read as an official addon.`);
+}
+
 async function checkListing(file, listing) {
   const repo = await github(`/repos/${listing.repository}`);
   if (!repo) return error(file, `Repository ${listing.repository} doesn't exist or isn't public.`);
@@ -77,7 +86,9 @@ async function checkListing(file, listing) {
     error(file, `Open-source listings need a license in the repository. Add one, or set "source": "closed".`);
   }
 
-  if (submitter && repo.owner.login.toLowerCase() !== submitter.toLowerCase()) {
+  if (isOfficial(listing)) {
+    if (submitter) warn(file, `This is an official listing. Reviewers: confirm @${submitter} is on the FivePRS team.`);
+  } else if (submitter && repo.owner.login.toLowerCase() !== submitter.toLowerCase()) {
     warn(file, `Submitted by @${submitter}, but ${listing.repository} belongs to @${repo.owner.login}. Reviewers: confirm they're allowed to list it.`);
   }
 
@@ -89,6 +100,12 @@ async function checkListing(file, listing) {
     if (!release.assets.some((entry) => matchesAsset(entry.name, listing.asset))) {
       error(file, `The latest release (${release.tag_name}) has no file named ${listing.asset}.`);
     }
+  }
+
+  if (listing.readme) {
+    const encoded = listing.readme.split("/").map(encodeURIComponent).join("/");
+    const readme = await github(`/repos/${listing.repository}/contents/${encoded}`);
+    if (!readme || Array.isArray(readme) || readme.type !== "file") error(file, `${listing.repository} has no file at ${listing.readme}.`);
   }
 
   if (listing.image) await checkImage(file, listing.image, "image");
@@ -131,7 +148,11 @@ const collections = [
   {
     dir: "listings",
     schema: "listing.schema.json",
-    unique: (entry) => [`Name:${entry.name.toLowerCase()}`, `Repository and asset:${entry.repository.toLowerCase()}/${entry.asset ?? ""}`],
+    unique: (entry) => [
+      `Name:${entry.name.toLowerCase()}`,
+      `Repository, asset and readme:${entry.repository.toLowerCase()}/${entry.asset ?? ""}/${entry.readme ?? ""}`,
+    ],
+    offline: checkOfficial,
     check: checkListing,
   },
   {
@@ -179,6 +200,7 @@ async function load(collection) {
 
     if (name !== `${entry.id}.json`) error(file, `The file must be named ${entry.id}.json to match its id.`);
     if (RESERVED.has(entry.id)) error(file, `The id "${entry.id}" is reserved.`);
+    collection.offline?.(file, entry);
     entries.push({ file, entry });
   }
 

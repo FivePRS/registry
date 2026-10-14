@@ -51,6 +51,12 @@
       "type": "string",
       "pattern": "^[A-Za-z0-9._-]+\\.(zip|7z|rar)$"
     },
+    "readme": {
+      "description": "Path to the Markdown file shown on the listing page, for repositories that hold more than one asset. Leave out to show the repository's README.",
+      "type": "string",
+      "maxLength": 200,
+      "pattern": "^(?![/.])(?!.*\\.\\.)[A-Za-z0-9 ._()\\[\\]/-]+\\.md$"
+    },
     "homepage": {
       "description": "Documentation or a project page.",
       "type": "string",
